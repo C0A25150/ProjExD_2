@@ -45,13 +45,13 @@ def main():
             if kk_rct.colliderect(bb_rct):
                 print("ゲームおーばー")
                 return
-        screen.blit(bg_img, [6, 0]) 
+        screen.blit(bg_img, [10, 10]) 
         key_lst = pg.key.get_pressed()
         DELTA = {
-            pg.K_UP: (1, -5),
-            pg.K_DOWN: (0, 6),
-            pg.K_LEFT: (9, 0),
-            pg.K_RIGHT: (8, 1)
+            pg.K_UP: (10, -5),
+            pg.K_DOWN: (10, 6),
+            pg.K_LEFT: (10, 0),
+            pg.K_RIGHT: (10, 1)
             }
         sum_mv = [0, 0]
         #if key_lst[pg.K_UP]:
@@ -80,7 +80,6 @@ def main():
         pg.display.update()
         tmr += 1
         clock.tick(50)
-       
 
 
 if __name__ == "__main__":
