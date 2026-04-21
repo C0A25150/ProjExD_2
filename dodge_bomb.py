@@ -3,7 +3,6 @@ import os
 import sys
 import pygame as pg
 
-
 WIDTH, HEIGHT = 1100, 650
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,6 +20,42 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     if rct.top < 0 or HEIGHT < rct.bottom:  # 縦方向判定
         tate = False
     return yoko, tate
+def gameover(screen: pg.Surface) -> None:
+    black = pg.Surface((WIDTH, HEIGHT))
+    black.fill((0, 0, 0))
+    black.set_alpha(200)
+
+    font = pg.font.Font(None, 80)
+    text = font.render("Game Over", True, (255, 255, 255))
+    text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
+
+    kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    kk_left_rct = kk_img.get_rect(center=(WIDTH//2 - 200, HEIGHT//2))
+    kk_right_rct = kk_img.get_rect(center=(WIDTH//2 + 200, HEIGHT//2))
+
+    screen.blit(black, (0, 0))
+    screen.blit(kk_img, kk_left_rct)
+    screen.blit(kk_img, kk_right_rct)
+    screen.blit(text, text_rect)
+
+    pg.display.update()
+    pg.time.delay(5000)
+    """
+    ゲームオーバー画面を表示する関数
+    """
+    black = pg.Surface((WIDTH, HEIGHT))
+    black.fill((0, 0, 0))
+    black.set_alpha(200)  
+
+    font = pg.font.Font(None, 80)
+    text = font.render("Game Over", True, (255, 255, 255))
+    text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2))
+
+    screen.blit(black, (0, 0))
+    screen.blit(text, text_rect)
+
+    pg.display.update()
+    pg.time.delay(5000)  
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -42,16 +77,16 @@ def main():
             if event.type == pg.QUIT: 
                 return
             
-            if kk_rct.colliderect(bb_rct):
-                print("ゲームおーばー")
+        if kk_rct.colliderect(bb_rct,):
+                gameover(screen)
                 return
-        screen.blit(bg_img, [10, 10]) 
+        screen.blit(bg_img, [0, 0]) 
         key_lst = pg.key.get_pressed()
         DELTA = {
-            pg.K_UP: (10, -5),
-            pg.K_DOWN: (10, 6),
-            pg.K_LEFT: (10, 0),
-            pg.K_RIGHT: (10, 1)
+            pg.K_UP: (0, -5),
+            pg.K_DOWN: (0, 5),
+            pg.K_LEFT: (-5, 0),
+            pg.K_RIGHT: (5, 0)
             }
         sum_mv = [0, 0]
         #if key_lst[pg.K_UP]:
