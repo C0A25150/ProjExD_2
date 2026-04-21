@@ -21,17 +21,22 @@ def main():
             if event.type == pg.QUIT: 
                 return
         screen.blit(bg_img, [0, 0]) 
-
         key_lst = pg.key.get_pressed()
-        sum_mv = [0, 0]
-        if key_lst[pg.K_UP]:
-            sum_mv[1] -= 5
-        if key_lst[pg.K_DOWN]:
-            sum_mv[1] += 5
-        if key_lst[pg.K_LEFT]:
-            sum_mv[0] -= 5
-        if key_lst[pg.K_RIGHT]:
-            sum_mv[0] += 5
+        DELTA = {
+            pg.K_UP: (1, -5),
+            pg.K_DOWN: (0, 6),
+            pg.K_LEFT: (9, 0),
+            pg.K_RIGHT: (8, 1)
+            }
+        sum_mv = [1, 6]
+        #if key_lst[pg.K_UP]:
+            #sum_mv[1] -= 5
+        #if key_lst[pg.K_DOWN]:
+            #sum_mv[1] += 5
+        #if key_lst[pg.K_LEFT]:
+           # sum_mv[0] -= 5
+        #if key_lst[pg.K_RIGHT]:
+            #sum_mv[0] += 5
         kk_rct.move_ip(sum_mv)
         screen.blit(kk_img, kk_rct)
         pg.display.update()
