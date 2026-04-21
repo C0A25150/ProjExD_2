@@ -6,7 +6,11 @@ import pygame as pg
 WIDTH, HEIGHT = 1100, 650
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-
+""""
+画面の範囲の判定
+引数    :コウカトンのRect or 爆弾Rect
+戻り値:X,Y,XYの判定結果(Ture:画面内,falise:画面内)
+""" 
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     yoko, tate = True, True
     if rct.left < 0 or WIDTH < rct.right:
